@@ -1,0 +1,16 @@
+{
+  "requestContext": {
+    "elb": {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:651241207884:targetgroup/content-dev/63260023d79a12b4"
+    }
+  },
+  "httpMethod": "GET",
+  "path": "/m3u8/r30m/20/raas-dev/SF-00000285/20190627/1561641904277/facd0ee5-7247-47ae-b934-da94a4eeaa40/video.master.m3u8",
+  "queryStringParameters": {
+    "pid": "SF-00000285%2FDemo_dev",
+    "rid": "a2bc1cbc-4675-4303-98aa-57e448a4ad22"
+  },
+  "headers": {},
+  "body": "",
+  "isBase64Encoded": false
+}

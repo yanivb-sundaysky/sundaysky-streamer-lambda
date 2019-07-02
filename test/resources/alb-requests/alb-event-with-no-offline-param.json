@@ -1,0 +1,27 @@
+{
+  "requestContext": {
+    "elb": {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:651241207884:targetgroup/yaniv-targetgroup/d4e034ad7869f429"
+    }
+  },
+  "httpMethod": "GET",
+  "path": "/content/r30m/yanivb/noprogram/20190612/2855484791000/91e1ba88-56de-4d5f-a610-f092164ac860/status.json",
+  "queryStringParameters": {
+    "offline": false
+  },
+  "headers": {
+    "accept": "*/*",
+    "accept-encoding": "gzip, deflate",
+    "cache-control": "no-cache",
+    "connection": "keep-alive",
+    "host": "s3-external-1.amazonaws.com",
+    "postman-token": "152534d7-6dfc-47e3-b736-6b3d39a4ef09",
+    "user-agent": "PostmanRuntime/7.15.0",
+    "x-amzn-trace-id": "Root=1-5d09d6e9-8f63e3c62a66a6ea9414af20",
+    "x-forwarded-for": "62.90.202.66",
+    "x-forwarded-port": "80",
+    "x-forwarded-proto": "http"
+  },
+  "body": "",
+  "isBase64Encoded": true
+}

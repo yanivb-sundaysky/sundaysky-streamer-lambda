@@ -1,0 +1,76 @@
+service:
+  name: sundaysky-streamer-lambda
+
+
+custom:
+  stage: ${opt:stage, 'dev'}
+  streamer_bucket:
+    dev: sundaysky-streamer-dev.s3.amazonaws.com
+    prod: sundaysky-streamer.s3.amazonaws.com
+    hipaa: ssky-5030-streamer.s3.amazonaws.com
+  deployment_bucket:
+    dev: sundaysky-serverless-dev
+    prod: sundaysky-serverless-prod
+    hipaa: ssky-5030-serverless-prod
+  load-balancer-listener-arn:
+    dev: arn:aws:elasticloadbalancing:us-east-1:651241207884:listener/app/stream-lambda-dev/e809e4b491c8149d/96ef5ab0a7e03c10
+    prod: arn:aws:elasticloadbalancing:us-east-1:383543149372:listener/app/stream-lambda-alb/f7b20849324565f7/06435b6f2a063525
+
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: us-east-1
+  stage: ${self:custom.stage}
+  deploymentBucket:  ${self:custom.deployment_bucket.${self:custom.stage}}
+  timeout: 40
+
+functions:
+  cross-domain:
+    handler: src/handler.getCrossDomainXML
+    tags:
+      Growth Factor: Frames
+      Customer: Shared
+      Business Line: CRM
+      Component: Streamer-Lambda
+      vpc: None
+    events:
+      - alb:
+          listenerArn: ${self:custom.load-balancer-listener-arn.${self:custom.stage}}
+          priority: 1
+          conditions:
+            path: "*crossdomain.xml"
+  media:
+    handler: src/handler.getMediaFile
+    tags:
+      Growth Factor: Frames
+      Customer: Shared
+      Business Line: CRM
+      Component: Streamer-Lambda
+      vpc: None
+    events:
+      - alb:
+          listenerArn: ${self:custom.load-balancer-listener-arn.${self:custom.stage}}
+          priority: 2
+          conditions:
+            path: "*.ts"
+  content:
+    handler: src/handler.getContentFile
+    tags:
+      Growth Factor: Frames
+      Customer: Shared
+      Business Line: CRM
+      Component: Streamer-Lambda
+      vpc: None
+    events:
+      - alb:
+          listenerArn: ${self:custom.load-balancer-listener-arn.${self:custom.stage}}
+          priority: 3
+          conditions:
+            path:
+              - "/content/*"
+              - "/m3u8/*.m3u8"
