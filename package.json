@@ -4,7 +4,8 @@
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "deploy": "serverless deploy -v"
   },
   "dependencies": {
     "@sundaysky/logger": "^1.0.16",
